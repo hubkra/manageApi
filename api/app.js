@@ -12,6 +12,7 @@ const { List, Task } = require("./db/models");
 // CORS OPTIONS
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
@@ -107,7 +108,7 @@ app.get("/lists/:listId/tasks", (req, res) => {
  * GET /lists/:listId/tasks/:taskID
  * Purpose: Get a one task in specified list
  */
-app.get("/lists/:listId/tasks/:taskID", (req, res) => {
+app.get("/lists/:listId/tasks/:taskId", (req, res) => {
   Task.findOne({
     _id: req.params.taskID,
     _listId: req.params.listId,
@@ -145,7 +146,7 @@ app.patch("/lists/:listId/tasks/:taskId", (req, res) => {
       $set: req.body,
     }
   ).then(() => {
-    res.sendStatus(200);
+    res.send({message: 'Task updated successfully'});
   });
 });
 
