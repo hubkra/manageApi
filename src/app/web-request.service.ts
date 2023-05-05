@@ -20,7 +20,7 @@ export class WebRequestService {
   }
 
   patch(uri:string,payload:Object){
-    return  this.http.post(`${this.url}/${uri}`, payload);
+    return  this.http.patch(`${this.url}/${uri}`, payload);
   }
 
   delete(uri:string){
